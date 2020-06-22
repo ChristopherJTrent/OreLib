@@ -1,4 +1,4 @@
-package com.arkevorkhat.orelib.Strategies;
+package com.arkevorkhat.orelib.strategies;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.biome.Biome;
@@ -25,6 +25,19 @@ public class BiasedCountGenerationStrategy extends OreGenerationStrategyBase
 	boolean whitelist;
 	List<Biome.Category> Biomes;
 	
+	/**
+	 * Default constructor:
+	 * defines a basic ore generation strategy with the following parameters
+	 * how many blocks will generate in the vein (size)
+	 * the number of veins that will generate per chunk (count)
+	 * minimum Y value for the ore to generate (lowerBound)
+	 * an undocumented and (to me) poorly understood value (upperBias)
+	 * the maximum Y value where the ore will generate (maximumHeight)
+	 * a list of Biome.Category objects (Biomes)
+	 *      (defaults to blacklisting the End and the Nether.)
+	 * a boolean determining whether Biomes will be treated as a whitelist or a blacklist (whitelist)
+	 *      (whitelist = false means that Biomes will be treated as a blacklist.)
+	 */
 	public BiasedCountGenerationStrategy()
 	{
 		size = 10;
@@ -37,6 +50,16 @@ public class BiasedCountGenerationStrategy extends OreGenerationStrategyBase
 		whitelist = false;
 	}
 	
+	/**
+	 * Basic parameterized constructor
+	 * @see BiasedCountGenerationStrategy#BiasedCountGenerationStrategy()
+	 * @param size number of ore blocks in a vein
+	 * @param count number of veins in a chunk
+	 * @param lowerBound lowest Y level a vein can generate at
+	 * @param upperBias required by Minecraft, undocumented. (safe default value = 1)
+	 * @param maximumHeight highest Y level a vein can generate at
+	 *
+	 */
 	public BiasedCountGenerationStrategy(int size,
 	                                     int count,
 	                                     int lowerBound,
@@ -53,6 +76,17 @@ public class BiasedCountGenerationStrategy extends OreGenerationStrategyBase
 		whitelist = false;
 	}
 	
+	/**
+	 * Advanced parameterized constructor
+	 * @see BiasedCountGenerationStrategy#BiasedCountGenerationStrategy()
+	 * @param size number of ore blocks in a vein
+	 * @param count number of veins in a chunk
+	 * @param lowerBound lowest Y level a vein can generate at
+	 * @param upperBias required by Minecraft, undocumented (safe default value = 1)
+	 * @param maximumHeight highest Y level a vein can generate at
+	 * @param whiteList whether Biomes is treated as a whitelist (true) or a blacklist (false)
+	 * @param Biomes a list (or vararg) of Biome.Category objects, used to create the biome filter
+	 */
 	public BiasedCountGenerationStrategy(int size,
 	                                     int count,
 	                                     int lowerBound,
@@ -71,13 +105,19 @@ public class BiasedCountGenerationStrategy extends OreGenerationStrategyBase
 		this.whitelist = whiteList;
 	}
 	
-	
-	@Override
+	/**
+	 * @return size (the vein size)
+	 * @see BiasedCountGenerationStrategy#BiasedCountGenerationStrategy()
+	 */
 	public int getSize()
 	{
 		return size;
 	}
 	
+	/**
+	 * @return a list of Biome Categories
+	 * @exception IllegalStateException if the biomes list is somehow null.
+	 */
 	@Override
 	public List<Biome.Category> getBiomeCategories()
 	{
@@ -91,13 +131,20 @@ public class BiasedCountGenerationStrategy extends OreGenerationStrategyBase
 		}
 	}
 	
+	/**
+	 * @return whitelist
+	 * @see BiasedCountGenerationStrategy#BiasedCountGenerationStrategy() 
+	 */
 	@Override
 	public boolean biomesAreWhitelisted()
 	{
 		return whitelist;
 	}
 	
-	@Override
+	/**
+	 * @param block the block to be registered
+	 * @return a configured OreFeatureConfig object with the default FillerBlockType Natural Stone (Overworld)
+	 */
 	public OreFeatureConfig getOreConfig(Block block)
 	{
 		return new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
@@ -105,7 +152,9 @@ public class BiasedCountGenerationStrategy extends OreGenerationStrategyBase
 		                            size);
 	}
 	
-	@Override
+	/**
+	 * @return a CountRangeConfig object with the proper values
+	 */
 	public CountRangeConfig getGeneratorConfig()
 	{
 		return new CountRangeConfig(count, lowerBound, upperBias, maximumHeight);

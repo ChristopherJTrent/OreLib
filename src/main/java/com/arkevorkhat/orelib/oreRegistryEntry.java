@@ -1,7 +1,7 @@
 package com.arkevorkhat.orelib;
 
 
-import com.arkevorkhat.orelib.Strategies.OreGenerationStrategyBase;
+import com.arkevorkhat.orelib.strategies.OreGenerationStrategyBase;
 
 import net.minecraft.block.Block;
 
