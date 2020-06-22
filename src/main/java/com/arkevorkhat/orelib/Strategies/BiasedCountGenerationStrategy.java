@@ -1,6 +1,5 @@
 package com.arkevorkhat.orelib.Strategies;
 
-import com.sun.istack.internal.NotNull;
 import net.minecraft.block.Block;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
@@ -15,9 +14,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * @author Arkevorkhat
- */
-public class BiasedCountGenerationStrategy extends OreGenerationStrategyBase {
+ @author Arkevorkhat */
+public class BiasedCountGenerationStrategy extends OreGenerationStrategyBase
+{
 	int size;
 	int count;
 	int lowerBound;
@@ -25,7 +24,9 @@ public class BiasedCountGenerationStrategy extends OreGenerationStrategyBase {
 	int maximumHeight;
 	boolean whitelist;
 	List<Biome.Category> Biomes;
-	public BiasedCountGenerationStrategy(){
+	
+	public BiasedCountGenerationStrategy()
+	{
 		size = 10;
 		count = 5;
 		lowerBound = 1;
@@ -35,12 +36,13 @@ public class BiasedCountGenerationStrategy extends OreGenerationStrategyBase {
 		Biomes.addAll(Arrays.asList(Biome.Category.THEEND, Biome.Category.NETHER));
 		whitelist = false;
 	}
+	
 	public BiasedCountGenerationStrategy(int size,
 	                                     int count,
 	                                     int lowerBound,
 	                                     int upperBias,
-	                                     int maximumHeight
-	) {
+	                                     int maximumHeight)
+	{
 		this.size = size;
 		this.count = count;
 		this.lowerBound = lowerBound;
@@ -50,15 +52,15 @@ public class BiasedCountGenerationStrategy extends OreGenerationStrategyBase {
 		Biomes.addAll(Arrays.asList(Biome.Category.THEEND, Biome.Category.NETHER));
 		whitelist = false;
 	}
-	public BiasedCountGenerationStrategy(
-		  int size,
-		  int count,
-		  int lowerBound,
-		  int upperBias,
-		  int maximumHeight,
-		  boolean whiteList,
-		  Biome.Category ... Biomes
-	) {
+	
+	public BiasedCountGenerationStrategy(int size,
+	                                     int count,
+	                                     int lowerBound,
+	                                     int upperBias,
+	                                     int maximumHeight,
+	                                     boolean whiteList,
+	                                     Biome.Category... Biomes)
+	{
 		this.size = size;
 		this.count = count;
 		this.lowerBound = lowerBound;
@@ -71,44 +73,48 @@ public class BiasedCountGenerationStrategy extends OreGenerationStrategyBase {
 	
 	
 	@Override
-	public int getSize() {
+	public int getSize()
+	{
 		return size;
 	}
 	
 	@Override
-	public List<Biome.Category> getBiomeCategories() {
-		if(Objects.isNull(Biomes)){
+	public List<Biome.Category> getBiomeCategories()
+	{
+		if(Objects.isNull(Biomes))
+		{
 			throw new IllegalStateException();
-		} else {
+		}
+		else
+		{
 			return Biomes;
 		}
 	}
 	
 	@Override
-	public boolean biomesAreWhitelisted() {
+	public boolean biomesAreWhitelisted()
+	{
 		return whitelist;
 	}
 	
 	@Override
-	public OreFeatureConfig getOreConfig(Block block) {
-		return new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, block.getDefaultState(), size);
+	public OreFeatureConfig getOreConfig(Block block)
+	{
+		return new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
+		                            block.getDefaultState(),
+		                            size);
 	}
 	
 	@Override
-	public CountRangeConfig getGeneratorConfig() {
-		return new CountRangeConfig(
-			  count,
-			  lowerBound,
-			  upperBias,
-			  maximumHeight
-		);
+	public CountRangeConfig getGeneratorConfig()
+	{
+		return new CountRangeConfig(count, lowerBound, upperBias, maximumHeight);
 	}
 	
 	@Override
-	public ConfiguredFeature<?, ?> getConfiguredFeature(Block block) {
-		return Feature.ORE.withConfiguration(
-			  this.getOreConfig(block))
-			  .withPlacement(Placement.COUNT_BIASED_RANGE.configure(
-					this.getGeneratorConfig()));
+	public ConfiguredFeature<?, ?> getConfiguredFeature(Block block)
+	{
+		return Feature.ORE.withConfiguration(this.getOreConfig(block))
+		                  .withPlacement(Placement.COUNT_BIASED_RANGE.configure(this.getGeneratorConfig()));
 	}
 }

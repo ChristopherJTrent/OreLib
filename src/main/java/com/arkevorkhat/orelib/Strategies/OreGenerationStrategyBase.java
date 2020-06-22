@@ -20,5 +20,5 @@ public abstract class OreGenerationStrategyBase
 	
 	public abstract CountRangeConfig getGeneratorConfig();
 	
-	public abstract ConfiguredFeature<?,?> getConfiguredFeature(Block block);
+	public abstract ConfiguredFeature<?, ?> getConfiguredFeature(Block block);
 }
