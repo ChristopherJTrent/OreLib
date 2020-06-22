@@ -1,4 +1,4 @@
-package com.example.examplemod;
+package com.arkevorkhat.orelib;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;

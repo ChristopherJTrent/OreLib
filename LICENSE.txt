@@ -518,3 +518,7 @@ SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
 DAMAGES.
 
                      END OF TERMS AND CONDITIONS
+
+All files within the src/ directory (henceforth Source Artefacts) are
+released under the WTFPL (Do whatever the fuck you want public license)
+which can be found at http://www.wtfpl.net/about/
