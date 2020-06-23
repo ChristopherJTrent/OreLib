@@ -142,12 +142,14 @@ jar.finalizedBy('reobfJar')
 publishing {
     publications {
         mavenJava(MavenPublication) {
+            groupId='com.arkevorkhat'
+            artifactId='orelib'
             artifact jar
         }
     }
     repositories {
         maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
+            url "file://C://Users/Chris/.m2/repository"
         }
     }
 }
