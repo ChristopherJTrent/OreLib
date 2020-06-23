@@ -149,7 +149,7 @@ publishing {
     }
     repositories {
         maven {
-            url "file://C://Users/Chris/.m2/repository"
+            url "file://~/.m2/repository"
         }
     }
 }
